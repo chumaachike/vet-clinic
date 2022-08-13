@@ -40,3 +40,4 @@ SELECT COUNT (*) FROM animals JOIN species ON animals.species_id = species.id WH
  SELECT animals.name from animals JOIN species ON animals.species_id = species.id JOIN owners ON animals.owner_id = owners.id WHERE owners.full_name = 'Jennifer Orwell' AND species.name = 'Digimon';
  SELECT animals.name from animals JOIN owners ON animals.owner_id = owners.id WHERE owners.full_name = 'Dean Winchester' AND animals.escape_attempts<1;
  SELECT owners.full_name FROM owners JOIN animals ON owners.id = animals.owner_id WHERE animals.escape_attempts = ( SELECT MAX(animals.escape_attempts) FROM animals);
+ SELECT owners.full_name, COUNT(animals.*) FROM animals INNER JOIN owners ON animals.owner_id = owners.id GROUP BY owners.full_name ORDER BY COUNT DESC LIMIT 1;
