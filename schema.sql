@@ -30,3 +30,33 @@ CREATE SEQUENCE animals_animal_id_seq OWNED BY animals.id;
 /* Add column owner_id which is a foreign key referencing the owners table */
 ALTER TABLE owners ADD CONSTRAINT unique_owner_id UNIQUE(id);
  ALTER TABLE animals ADD COLUMN owner_id INT references owners(id);
+
+ CREATE TABLE specializations(
+    ID INT GENERATED ALWAYS AS IDENTITY,
+    species_id INT , 
+    vets_id INT, 
+
+    CONSTRAINT SPECIES_FOREIGN
+    FOREIGN KEY (species_id)
+    REFERENCES SPECIES(ID), 
+
+    CONSTRAINT VETS_FOREIGN
+    FOREIGN KEY (vets_id)
+    REFERENCES VETS(ID)
+
+);
+
+CREATE TABLE VISITS (
+    ID INT GENERATED ALWAYS AS IDENTITY, 
+    ANIMALS_ID INT, 
+    VETS_ID INT, 
+    VISIT_DATE DATE, 
+
+    CONSTRAINT ANIMALS_FOREIGN 
+    FOREIGN KEY (ANIMALS_ID)
+    REFERENCES ANIMALS(ID), 
+
+    CONSTRAINT VETS_FOREIGN 
+    FOREIGN KEY (VETS_ID)
+    REFERENCES VETS(ID)
+); 
