@@ -27,12 +27,17 @@ SELECT AVG(weight_kg) FROM animals;
  SELECT SUM(escape_attempts) FROM animals WHERE nutered = false;
 /* What is the minimum and maximum weight of each type of animal? */
 SELECT MIN(weight_kg) FROM animals WHERE species = 'digimon';
- SELECT MAX(weight_kg) FROM animals WHERE species = 'digimon';
- SELECT MAX(weight_kg) FROM animals WHERE species = 'pokemon';
- SELECT MIN(weight_kg) FROM animals WHERE species = 'pokemon';
+SELECT MAX(weight_kg) FROM animals WHERE species = 'digimon';
+SELECT MAX(weight_kg) FROM animals WHERE species = 'pokemon';
+SELECT MIN(weight_kg) FROM animals WHERE species = 'pokemon';
 /* What is the average number of escape attempts per animal type of those born between 1990 and 2000? */
- SELECT AVG(escape_attempts) FROM animals WHERE species = 'pokemon' AND date_of_birth BETWEEN '1990-01-01' AND '2000-12-31';
-  SELECT AVG(escape_attempts) FROM animals WHERE species = 'digimon' AND date_of_birth BETWEEN '1990-01-01' AND '2000-12-31';
-  
-
-
+SELECT AVG(escape_attempts) FROM animals WHERE species = 'pokemon' AND date_of_birth BETWEEN '1990-01-01' AND '2000-12-31';
+SELECT AVG(escape_attempts) FROM animals WHERE species = 'digimon' AND date_of_birth BETWEEN '1990-01-01' AND '2000-12-31';
+SELECT name FROM animals JOIN owners ON animals.owner_id = owners.id WHERE owners.full_name='Melody Pond';
+SELECT animals.name FROM animals JOIN species ON animals.species_id = species.id WHERE species.name='Pokemon';  
+SELECT COUNT (*) FROM animals JOIN species ON animals.species_id = species.id WHERE species.name = 'Pokemon';
+SELECT COUNT (*) FROM animals JOIN species ON animals.species_id = species.id WHERE species.name = 'Digimon';
+ SELECT animals.name from animals JOIN species ON animals.species_id = species.id JOIN owners ON animals.owner_id = owners.id WHERE owners.full_name = 'Jennifer Orwell' AND species.name = 'Digimon';
+ SELECT animals.name from animals JOIN owners ON animals.owner_id = owners.id WHERE owners.full_name = 'Dean Winchester' AND animals.escape_attempts<1;
+ SELECT owners.full_name FROM owners JOIN animals ON owners.id = animals.owner_id WHERE animals.escape_attempts = ( SELECT MAX(animals.escape_attempts) FROM animals);
+ SELECT owners.full_name, COUNT(animals.*) FROM animals INNER JOIN owners ON animals.owner_id = owners.id GROUP BY owners.full_name ORDER BY COUNT DESC LIMIT 1;
